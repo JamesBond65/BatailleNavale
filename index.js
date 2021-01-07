@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
 var gameNumber = 1;
 var userWaiting = [];
 var users = {};
-var ships = ['a1', 'a2'];
 var score = 0;
 
 
@@ -85,7 +84,7 @@ io.on('connection', (socket) => {
   users[socket.id] = {
     id: socket.id,
     roomName: null,
-    ships: ships,
+    ships: ['a1', 'a2'],
     score: 0,
     hisTurn: false,
     foe: null,
