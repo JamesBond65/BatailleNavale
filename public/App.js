@@ -1,16 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const grilleUtilisateur = document.querySelector('.grid-user')
-    const computerGrid = document.querySelector('.grid-computer')
+    const grilleAdversaire = document.querySelector('.grid-computer')
     const displayGrid = document.querySelector('.grid-display')
     const ships = document.querySelectorAll('.ship')
-    const destroyer = document.querySelector('.destroyer-container')
-    const submarine = document.querySelector('.submarine-container')
-    const cruiser = document.querySelector('.cruiser-container')
-    const porteAvion = document.querySelector('.porteAvion-container')
-    const carrier = document.querySelector('.carrier-container')
-    const startButton = document.querySelector('#start')
-    const rotateButton = document.querySelector('#rotate')
     const turnDisplay = document.querySelector('#whose-go')
     const infoDisplay = document.querySelector('#info')
     const setupButtons = document.getElementById('setup-buttons')
@@ -39,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
         directions: [[0, 1],[0, width]]
       },
       {
-        name: 'submarine',
+        name: 'sousMarin',
         directions: [[0, 1, 2],[0, width, width*2]]
       },
       {
-        name: 'cruiser',
+        name: 'croiseur',
         directions: [[0, 1, 2],[0, width, width*2]]
       },
       {
@@ -57,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ]
   
     createBoard(grilleUtilisateur, userSquares)
-    createBoard(computerGrid, computerSquares)
+    createBoard(grilleAdversaire, computerSquares)
   
     //-------------------------------------------------------------------------------------//
     startmultiJoueur()
@@ -195,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function rotate() {
       if (isHorizontal) {
         destroyer.classList.toggle('destroyer-container-vertical')
-        submarine.classList.toggle('submarine-container-vertical')
-        cruiser.classList.toggle('cruiser-container-vertical')
+        sousMarin.classList.toggle('sousMarin-container-vertical')
+        croiseur.classList.toggle('croiseur-container-vertical')
         porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
         isHorizontal = false
@@ -205,8 +198,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (!isHorizontal) {
         destroyer.classList.toggle('destroyer-container-vertical')
-        submarine.classList.toggle('submarine-container-vertical')
-        cruiser.classList.toggle('cruiser-container-vertical')
+        sousMarin.classList.toggle('sousMarin-container-vertical')
+        croiseur.classList.toggle('croiseur-container-vertical')
         porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
         isHorizontal = true

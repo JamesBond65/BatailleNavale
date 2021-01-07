@@ -161,12 +161,12 @@ body {
   }
   
   .sousMarin-container,
-  .cruiser-container {
+  .croiseur-container {
     --width: 3;
   }
   
   .sousMarin-container-vertical,
-  .cruiser-container-vertical {
+  .croiseur-container-vertical {
     --height: 3;
     --width: 1;
   }
