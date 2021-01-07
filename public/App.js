@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const grilleUtilisateur = document.querySelector('.grille-utilisateur')
     const grilleAdversaire = document.querySelector('.grille-adversaire')
     
-   
     const carreUtilisateur = []
     const carreAdversaire = []
     let estHorizontal = true
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createBoard(grilleAdversaire, carreAdversaire)
   
     
-    
     startmultiJoueur()
   
     // MultiJoueur
@@ -54,26 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
       
       console.log(positionBateaux)
       
-      
-      const socket = io();
-  
-      // Get your player number
-      socket.on('player-number', num => {
-        if (num === -1) {
-          infoDisplay.innerHTML = "Sorry, the server is full"
-        } else {
-          playerNum = parseInt(num)
-          if(playerNum === 1) currentPlayer = "enemy"
-  
-          console.log(playerNum)
-  
-          // Get other player status
-          socket.emit('check-players')
-        }
-      })
+      //-----------------------------------------Partie non fonctionnelle-----------------------------------------------------//
+     
+      /* const socket = io();
   
   
-      // Setup event listeners for firing
+      //Ecoute du serveur pour tirer
+
       carreAdversaire.forEach(square => {
         square.addEventListener('click', () => {
           if(currentPlayer === 'user' && ready && enemyReady) {
@@ -83,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       })
   
-      // On Fire Received
+      //Recevoir un tir
+
       socket.on('fire', id => {
         enemyGo(id)
         const square = carreUtilisateur[id]
@@ -91,23 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
         playGameMulti(socket)
       })
   
-      // On Fire Reply Received
+      // Tirer sur l'adversaire 
+
       socket.on('fire-reply', classList => {
         revealSquare(classList)
         playGameMulti(socket)
       })
-  
-      function playerConnectedOrDisconnected(num) {
-        let player = `.p${parseInt(num) + 1}`
-        document.querySelector(`${player} .connected`).classList.toggle('active')
-        if(parseInt(num) === playerNum) document.querySelector(player).style.fontWeight = 'bold'
-      }
+  */
     }
   
   
-    
-
-    //Create Board
+    //Créer la grille de jeu
     function createBoard(grid, squares) {
       for (let i = 0; i < width*width; i++) {
         const square = document.createElement('div')
@@ -116,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         squares.push(square)
       }
     }
-  
-
     
     
     //Mettre les bateaux en position aléatoire et renvoyer tableau avec position des bateaux
@@ -149,11 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
           for (let u=0; u<longueurBateaux; u++){
             positionBateaux.push(randomStart + u*10)
             }
-        }
-        
+        }  
       } 
-      
       else generate(ship)
     }
-
   }) 
