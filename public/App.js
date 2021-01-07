@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       generate(tableauBateaux[2])
       generate(tableauBateaux[3])
       generate(tableauBateaux[4])  
+      
       console.log(positionBateaux)
       
       
@@ -104,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
   
-    //------------------------------------------------------------------------------------------------------------------------
     
 
     //Create Board
@@ -155,62 +155,5 @@ document.addEventListener('DOMContentLoaded', () => {
       
       else generate(ship)
     }
-    
-  //---------------------------------------------------------------------------------------------//
 
-
-    //Tourner les bateaux
-    function rotate() {
-      if (estHorizontal) {
-        destroyer.classList.toggle('destroyer-container-vertical')
-        sousMarin.classList.toggle('sousMarin-container-vertical')
-        croiseur.classList.toggle('croiseur-container-vertical')
-        porteAvion.classList.toggle('porteAvion-container-vertical')
-        carrier.classList.toggle('carrier-container-vertical')
-        estHorizontal = false
-        // console.log(estHorizontal)
-        return
-      }
-      if (!estHorizontal) {
-        destroyer.classList.toggle('destroyer-container-vertical')
-        sousMarin.classList.toggle('sousMarin-container-vertical')
-        croiseur.classList.toggle('croiseur-container-vertical')
-        porteAvion.classList.toggle('porteAvion-container-vertical')
-        carrier.classList.toggle('carrier-container-vertical')
-        estHorizontal = true
-        // console.log(estHorizontal)
-        return
-      }
-    }
-    rotateButton.addEventListener('click', rotate)
-  
-
-    // Fonction multiJoueur------------------------------------------------------------------------------------------
-
-    function playGameMulti(socket) {
-
-
-      setupButtons.style.display = 'none'
-      if(isGameOver) return
-      if(!ready) {
-        socket.emit('player-ready')
-        ready = true
-        playerReady(playerNum)
-      }
-  
-      if(enemyReady) {
-        if(currentPlayer === 'user') {
-          turnDisplay.innerHTML = 'Your Go'
-        }
-        if(currentPlayer === 'enemy') {
-          turnDisplay.innerHTML = "Enemy's Go"
-        }
-      }
-    }
-  
-    function playerReady(num) {
-      let player = `.p${parseInt(num) + 1}`
-      document.querySelector(`${player} .ready`).classList.toggle('active')
-    }
-  //--------------------------------------------------------------------------------------------------------------------------
   }) 
