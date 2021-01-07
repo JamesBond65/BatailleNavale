@@ -1,32 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    const grilleUtilisateur = document.querySelector('.grid-user')
-    const grilleAdversaire = document.querySelector('.grid-computer')
-    const displayGrid = document.querySelector('.grid-display')
-    const ships = document.querySelectorAll('.ship')
-    const turnDisplay = document.querySelector('#whose-go')
-    const infoDisplay = document.querySelector('#info')
-    const setupButtons = document.getElementById('setup-buttons')
+    const grilleUtilisateur = document.querySelector('.grille-utilisateur')
+    const grilleAdversaire = document.querySelector('.grille-adversaire')
     
-    
-    
-    
-    const userSquares = []
-    const computerSquares = []
-    let isHorizontal = true
-    let isGameOver = false
-    let currentPlayer = 'user'
+   
+    const carreUtilisateur = []
+    const carreAdversaire = []
+    let estHorizontal = true
     const width = 10
-    let playerNum = 0
-    let ready = false
-    let enemyReady = false
-    let allShipsPlaced = false
-    let shotFired = -1
+    
     var positionBateaux = []
     
     
     //Bateaux
-    const shipArray = [
+    const tableauBateaux = [
       {
         name: 'destroyer',
         directions: [[0, 1],[0, width]]
@@ -49,20 +36,21 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     ]
   
-    createBoard(grilleUtilisateur, userSquares)
-    createBoard(grilleAdversaire, computerSquares)
+    createBoard(grilleUtilisateur, carreUtilisateur)
+    createBoard(grilleAdversaire, carreAdversaire)
   
-    //-------------------------------------------------------------------------------------//
+    
+    
     startmultiJoueur()
   
-    // multiJoueur
+    // MultiJoueur
     function startmultiJoueur() {
      
-      generate(shipArray[0])
-      generate(shipArray[1])
-      generate(shipArray[2])
-      generate(shipArray[3])
-      generate(shipArray[4])  
+      generate(tableauBateaux[0])
+      generate(tableauBateaux[1])
+      generate(tableauBateaux[2])
+      generate(tableauBateaux[3])
+      generate(tableauBateaux[4])  
       console.log(positionBateaux)
       
       
@@ -85,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
       // Setup event listeners for firing
-      computerSquares.forEach(square => {
+      carreAdversaire.forEach(square => {
         square.addEventListener('click', () => {
           if(currentPlayer === 'user' && ready && enemyReady) {
             shotFired = square.dataset.id
@@ -97,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // On Fire Received
       socket.on('fire', id => {
         enemyGo(id)
-        const square = userSquares[id]
+        const square = carreUtilisateur[id]
         socket.emit('fire-reply', square.classList)
         playGameMulti(socket)
       })
@@ -115,19 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   
-    // Single Player
-    function startSinglePlayer() {
-      generate(shipArray[0])
-      generate(shipArray[1])
-      generate(shipArray[2])
-      generate(shipArray[3])
-      generate(shipArray[4])
-  
-      startButton.addEventListener('click', () => {
-        setupButtons.style.display = 'none'
-        playGameSingle()
-      })
-    }
   
     //------------------------------------------------------------------------------------------------------------------------
     
@@ -144,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
     
-    //--------------------------------------------------------------------------------------//
     
     //Mettre les bateaux en position aléatoire et renvoyer tableau avec position des bateaux
     function generate(ship) {
@@ -153,17 +127,18 @@ document.addEventListener('DOMContentLoaded', () => {
       let current = ship.directions[randomDirection]
       if (randomDirection === 0) direction = 1
       if (randomDirection === 1) direction = 10
-      let randomStart = Math.abs(Math.floor(Math.random() * userSquares.length - (ship.directions[0].length * direction)))
+      let randomStart = Math.abs(Math.floor(Math.random() * carreUtilisateur.length - (ship.directions[0].length * direction)))
   
-      const isTaken = current.some(index => userSquares[randomStart + index].classList.contains('taken'))
+      const isTaken = current.some(index => carreUtilisateur[randomStart + index].classList.contains('taken'))
       const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1)
-      const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
+      const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0) //Empêche au bateau d'être placé sur le bord de la grille
   
       if (!isTaken && !isAtRightEdge && !isAtLeftEdge){
-        current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name)) 
+        current.forEach(index => carreUtilisateur[randomStart + index].classList.add('taken', ship.name)) 
         
         var longueurBateaux = ship.directions[randomDirection].length
         
+        //Tableau de potition des bateaux
         if (direction === 1){
           for (let i=0; i<longueurBateaux; i++){
             positionBateaux.push(randomStart + i)
@@ -186,24 +161,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Tourner les bateaux
     function rotate() {
-      if (isHorizontal) {
+      if (estHorizontal) {
         destroyer.classList.toggle('destroyer-container-vertical')
         sousMarin.classList.toggle('sousMarin-container-vertical')
         croiseur.classList.toggle('croiseur-container-vertical')
         porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
-        isHorizontal = false
-        // console.log(isHorizontal)
+        estHorizontal = false
+        // console.log(estHorizontal)
         return
       }
-      if (!isHorizontal) {
+      if (!estHorizontal) {
         destroyer.classList.toggle('destroyer-container-vertical')
         sousMarin.classList.toggle('sousMarin-container-vertical')
         croiseur.classList.toggle('croiseur-container-vertical')
         porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
-        isHorizontal = true
-        // console.log(isHorizontal)
+        estHorizontal = true
+        // console.log(estHorizontal)
         return
       }
     }

@@ -57,7 +57,7 @@ body {
   .porteAvion-grid {
     margin: 2vmin;
     display: grid;
-    background-color: hsl(200, 100%, 50%);
+    background-color: hsl(202, 100%, 50%);
     grid-template-rows: repeat(10, 4.6vmin);
     grid-template-columns: repeat(10, 4.6vmin);
   }
