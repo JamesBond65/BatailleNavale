@@ -54,7 +54,7 @@ body {
 
   /*----------------------------------------------------------*/
   
-  .battleship-grid {
+  .porteAvion-grid {
     margin: 2vmin;
     display: grid;
     background-color: hsl(200, 100%, 50%);
@@ -62,15 +62,11 @@ body {
     grid-template-columns: repeat(10, 4.6vmin);
   }
   
-  .grid-computer > .taken,
-  .grid-computer > .boom {
-    background-color: hsl(210, 1%, 36%) !important;
-  }
   
   .taken,
   .ship {
     position: relative;
-    background-color: hsl(0, 0%, 80%);
+    background-color: hsl(0, 1%, 42%);
   }
   
   .taken.start.vertical,
@@ -144,26 +140,13 @@ body {
     }
   }
   
-  .grid-display {
-    display: flex;
-  }
-  
   .ship > div {
     width: 4.6vmin;
     height: 4.6vmin;
   }
   
   
-  .ship {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1vmin;
-    width: calc(4.6vmin * var(--width, 1));
-    height: calc(4.6vmin * var(--height, 1));
-    border-radius: 2.3vmin;
-  }
-  
-  .battleship-grid div {
+  .porteAvion-grid div {
     border: 1px solid hsla(0, 0%, 100%, .2);
   }
   
@@ -177,33 +160,33 @@ body {
     --width: 1;
   }
   
-  .submarine-container,
+  .sousMarin-container,
   .cruiser-container {
     --width: 3;
   }
   
-  .submarine-container-vertical,
+  .sousMarin-container-vertical,
   .cruiser-container-vertical {
     --height: 3;
     --width: 1;
   }
   
-  .battleship-container {
+  .porteAvion-container {
     --width: 4;
     
   }
   
-  .battleship-container-vertical {
+  .porteAvion-container-vertical {
     --height: 4;
     --width: 1;
   }
   
-  .carrier-container {
+  .destroyer-container {
     --width: 5;
     
   }
   
-  .carrier-container-vertical {
+  .destroyer-container-vertical {
     --height: 5;
     --width: 1;
   }
@@ -281,18 +264,18 @@ body {
     }
   }
   
-  .player {
+  .joueur {
     margin: 2vmin;
   }
   
-  .connected, .ready {
+  .connecté, .pret {
     font-weight: normal;
     opacity: .25;
     text-decoration: line-through;
   }
   
-  .connected.active,
-  .ready.active {
+  .connecté.active,
+  .pret.active {
     opacity: 1;
     text-decoration: none;
   }

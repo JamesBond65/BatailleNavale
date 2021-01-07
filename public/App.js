@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    const userGrid = document.querySelector('.grid-user')
+    const grilleUtilisateur = document.querySelector('.grid-user')
     const computerGrid = document.querySelector('.grid-computer')
     const displayGrid = document.querySelector('.grid-display')
     const ships = document.querySelectorAll('.ship')
     const destroyer = document.querySelector('.destroyer-container')
     const submarine = document.querySelector('.submarine-container')
     const cruiser = document.querySelector('.cruiser-container')
-    const battleship = document.querySelector('.battleship-container')
+    const porteAvion = document.querySelector('.porteAvion-container')
     const carrier = document.querySelector('.carrier-container')
     const startButton = document.querySelector('#start')
     const rotateButton = document.querySelector('#rotate')
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         directions: [[0, 1, 2],[0, width, width*2]]
       },
       {
-        name: 'battleship',
+        name: 'porteAvion',
         directions: [[0, 1, 2, 3],[0, width, width*2, width*3]]
       },
       {
@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     ]
   
-    createBoard(userGrid, userSquares)
+    createBoard(grilleUtilisateur, userSquares)
     createBoard(computerGrid, computerSquares)
   
     //-------------------------------------------------------------------------------------//
-    startMultiPlayer()
+    startmultiJoueur()
   
-    // Multiplayer
-    function startMultiPlayer() {
+    // multiJoueur
+    function startmultiJoueur() {
      
       generate(shipArray[0])
       generate(shipArray[1])
@@ -153,21 +153,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //--------------------------------------------------------------------------------------//
     
-    //Mettre les bateaux en position aléatoire
+    //Mettre les bateaux en position aléatoire et renvoyer tableau avec position des bateaux
     function generate(ship) {
       
       let randomDirection = Math.floor(Math.random() * ship.directions.length)
       let current = ship.directions[randomDirection]
       if (randomDirection === 0) direction = 1
       if (randomDirection === 1) direction = 10
-      let randomStart = Math.abs(Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length * direction)))
+      let randomStart = Math.abs(Math.floor(Math.random() * userSquares.length - (ship.directions[0].length * direction)))
   
-      const isTaken = current.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+      const isTaken = current.some(index => userSquares[randomStart + index].classList.contains('taken'))
       const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1)
       const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
   
       if (!isTaken && !isAtRightEdge && !isAtLeftEdge){
-        current.forEach(index => computerSquares[randomStart + index].classList.add('taken', ship.name)) 
+        current.forEach(index => userSquares[randomStart + index].classList.add('taken', ship.name)) 
         
         var longueurBateaux = ship.directions[randomDirection].length
         
@@ -191,13 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //---------------------------------------------------------------------------------------------//
 
 
-    //Rotate the ships
+    //Tourner les bateaux
     function rotate() {
       if (isHorizontal) {
         destroyer.classList.toggle('destroyer-container-vertical')
         submarine.classList.toggle('submarine-container-vertical')
         cruiser.classList.toggle('cruiser-container-vertical')
-        battleship.classList.toggle('battleship-container-vertical')
+        porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
         isHorizontal = false
         // console.log(isHorizontal)
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         destroyer.classList.toggle('destroyer-container-vertical')
         submarine.classList.toggle('submarine-container-vertical')
         cruiser.classList.toggle('cruiser-container-vertical')
-        battleship.classList.toggle('battleship-container-vertical')
+        porteAvion.classList.toggle('porteAvion-container-vertical')
         carrier.classList.toggle('carrier-container-vertical')
         isHorizontal = true
         // console.log(isHorizontal)
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     rotateButton.addEventListener('click', rotate)
   
 
-    // Game Logic for MultiPlayer------------------------------------------------------------------------------------------
+    // Fonction multiJoueur------------------------------------------------------------------------------------------
 
     function playGameMulti(socket) {
 
