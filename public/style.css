@@ -4,7 +4,6 @@ body {
     overflow-x: hidden;
     
   }
-
   
   .splash-container {
     display: flex;
@@ -18,8 +17,7 @@ body {
   .titre {
     font-family: 'Bangers', cursive;
     font-size: 7rem;
-  }
-  
+  } 
   
   .btn {
     font-size: inherit;
@@ -51,8 +49,6 @@ body {
     justify-content: center;
     width: 100%;
   }
-
-  /*----------------------------------------------------------*/
   
   .porteAvion-grid {
     margin: 2vmin;
@@ -61,7 +57,6 @@ body {
     grid-template-rows: repeat(10, 4.6vmin);
     grid-template-columns: repeat(10, 4.6vmin);
   }
-  
   
   .taken,
   .ship {
@@ -114,154 +109,15 @@ body {
     animation: ripplesX 3s linear infinite;
     border-top: none;
     border-bottom: none;
-  }
-  
-  @keyframes ripplesX {
-    0% {
-      opacity: 1;
-      transform: scaleX(1);
-    }
-  
-    100% {
-      opacity: 0;
-      transform: scaleX(1.5);
-    }
-  }
-  
-  @keyframes ripplesY {
-    0% {
-      opacity: 1;
-      transform: scaleY(1);
-    }
-  
-    100% {
-      opacity: 0;
-      transform: scaleY(1.5);
-    }
-  }
+  } 
   
   .ship > div {
     width: 4.6vmin;
     height: 4.6vmin;
   }
   
-  
   .porteAvion-grid div {
     border: 1px solid hsla(0, 0%, 100%, .2);
-  }
-  
-  .destroyer-container {
-    --width: 2;
-    
-  }
-  
-  .destroyer-container-vertical {
-    --height: 2;
-    --width: 1;
-  }
-  
-  .sousMarin-container,
-  .croiseur-container {
-    --width: 3;
-  }
-  
-  .sousMarin-container-vertical,
-  .croiseur-container-vertical {
-    --height: 3;
-    --width: 1;
-  }
-  
-  .porteAvion-container {
-    --width: 4;
-    
-  }
-  
-  .porteAvion-container-vertical {
-    --height: 4;
-    --width: 1;
-  }
-  
-  .destroyer-container {
-    --width: 5;
-    
-  }
-  
-  .destroyer-container-vertical {
-    --height: 5;
-    --width: 1;
-  }
-  
-  .hidden-info {
-    font-size: 1.5rem;
-    align-items: center;
-    flex-direction: column;
-    
-  }
-  
-  .info-text {
-    margin: 1rem;
-  }
-  
-
-  .miss,
-  .boom {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .boom::after,
-  .miss::after {
-    content: '';
-    position: absolute;
-    border-radius: 100%;
-    width: 2vmin;
-    height: 2vmin;
-  }
-  
-  .miss::after {
-    background-color: white;
-  }
-  
-  .boom::after {
-    background-color: red;
-  }
-  
-  .miss::before {
-    content: '';
-    position: absolute;
-    animation: hit .2s ease-out forwards;
-    border: 1vmin solid white;
-    border-radius: 100%;
-    width: 2vmin;
-    height: 2vmin;
-  }
-  
-
-  .boom {
-    animation: boom .2s ease-out forwards;
-  }
-  
-  @keyframes hit {
-    0% {
-      opacity: 1;
-      transform: scale(0);
-    }
-  
-    100% {
-      opacity: 0;
-      transform: scale(4);
-    }
-  }
-  
-  @keyframes boom {
-    0% {
-      background-color: red;
-    }
-  
-    100% {
-      background-color: hsl(0, 0%, 80%);
-    }
   }
   
   .joueur {
@@ -272,10 +128,4 @@ body {
     font-weight: normal;
     opacity: .25;
     text-decoration: line-through;
-  }
-  
-  .connecté.active,
-  .pret.active {
-    opacity: 1;
-    text-decoration: none;
-  }
+  } 
